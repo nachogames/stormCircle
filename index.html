@@ -1,0 +1,54 @@
+<html>
+<body>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<button id="clear" onclick="clearCanvas()">Clear</button>
+<button id="draw" onclick="draw()">Draw</button>
+
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    draw();
+
+
+    function draw(){
+        var circles = [200, 75, 30, 10];
+        var ctrX = c.width/2;
+        var ctrY = c.height/2;
+        var lR = 100;
+        var sR = 30;
+
+
+        drawCircle(ctrX, ctrY, lR);
+
+        var maxR = lR - sR;
+        drawCircle(ctrX, ctrY, maxR, "#FF0000");
+
+        var sideX = maxR - 100;
+        var sideR = maxR
+        var x2 = sideX * sideX;
+        var r2 = sideR * sideR;
+        var sideY = Math.sqrt(r2 - x2);
+        var x = ctrX + sideX;
+        var y = ctrY - sideY;
+        drawCircle(x,y,sR);
+    }
+
+    function clearCanvas(){
+        ctx.clearRect(0, 0, c.width, c.height);
+    }
+
+    function drawCircle(x,y,radius,strokeColor){
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.strokeStyle="#000000";
+        if(strokeColor) ctx.strokeStyle=strokeColor;
+        ctx.stroke();
+    }
+
+</script> 
+
+</body>
+</html>
